@@ -1,0 +1,38 @@
+ i. Go look at https://chdk.fandom.com/wiki/Getting_CHDKPTP_on_BeagleBone_Black_to_work
+ ii. 
+
+ 1. Get current chdkptp version
+  1a. Source at https://app.assembla.com/spaces/chdkptp/subversion/source/HEAD/trunk
+			 or http://subversion.assembla.com/svn/chdkptp/trunk
+			 USE SVN
+ 2. Get lua5.1.5
+  2a. Source at http://www.lua.org/ftp/lua-5.1.5.tar.gz
+			 USE WGET
+			 USE tar -xvzf [arg]
+ 3. Get libusb1.0
+  3a. Source at http://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.18/libusb-1.0.18.tar.bz2
+			 USE WGET
+			 USE tar -xvf [arg]
+
+ 4. Get cross-compiler for TX1
+  4a. Source at 
+  4b. Test cross-compile hello.c
+ 5. Get compiler for Nano
+  5a. Source at
+  5b. Test cross-compile hello.c
+ 
+ 6. Crossompile lua5.1.5
+  6a. Disable readline (no GUI) in luaconf.h:	/* #define LUA_USE_READLINE*/
+  6b. Modify Makefile:							linux:
+														$(MAKE) all MYCFLAGS=-DLUA_USE_LINUX MYLIBS="-Wl,-E -ldl"
+  6c. Verify .a file
+  6d. Test
+ 7. Crossompile libusb1.0
+  7a. Verify .a file
+ 
+ 8. Edit chdkptp makefile and configs
+  8a. makefile edits
+  8b. config edits
+  8c. DO NOT USE GUI
+  
+ 9. Build?
