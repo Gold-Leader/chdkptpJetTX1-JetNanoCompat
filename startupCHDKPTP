@@ -1,0 +1,9 @@
+c
+=switch_mode_usb(1)
+=sleep(1000)
+rs /home/leonardo/Downloads/chdkptp-r921
+=sleep(1000)
+=switch_mode_usb(0)
+=sleep(1000)
+dis
+quit

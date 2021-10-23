@@ -1,0 +1,47 @@
+1. Introduction
+	CHDK, the Canon Hacker Development Kit, is 3rd party tool that grants finer control over settings in Canon cameras.
+	CHDKPTP, CHDK Picture Tranfser Protocol, is an extension to CHDK that allows for operation between a host device and
+	the Canon camera over a USB cable.
+
+	CHDKPTP allows for remote shooting, script upload and excecution, image download, and other features on a CHDK camera.
+
+2. Installation:
+	Precompiled binaries are at: https://app.assembla.com/spaces/chdkptp/documents
+	The Linux version comes in a zip folder called, chdkptp-r921-Linux-x86_64.zip, and contains all necessary files.
+	Place the extracted files somewhere
+	The excecutable is chdkptp and is invoked using shell script chdkptp.sh
+	chdkptp.sh has a variable that needs to be set to the path of the extracted chdkptp folder, usually named chdkptp-r921
+	chdkptp.sh may need elevation in permission via chmod
+
+	Ignore chdkptp_gui.sh and chdkptp_gui, these run the GUI application for CHDKPTP
+
+3. Usage:
+	The gvfs-gphoto2-volume-monitor monitor MUST be killed or CHDKPTP will be unable to claim the camera and the usb connection
+	The automount features of Ubuntu must be changed to never automount and never automount-open
+	dfconf Editor is a GUI application that simplifies this process
+
+	When the CLI appears in the terminal, use connect, or c, to connect, a few message may appear
+		c
+		connected: Canon (camera model), max packet size (number),	connection established, can now use other commands
+		open_camera_dev_usb: ptp_opensession faled 0x2ff,		PTP connection failed?
+		Error: Connection Failed,					Is bad
+		Error: No matching devices found,				CHDKPTP can't find a camera
+	Use rec to switch the camera into shooting mode, a few messages may appear
+		rec
+		Error: already in rec, 		this can be ignored
+		Error: switch failed,		there is a communication problem
+		Error: connection failed,	something else may have claimed the camera
+	Then, use shoot, to have the camera take a picture and save it to its SD card.
+	Or, use remoteshoot, rs, to have the camera take a picture and save it to the host.
+		rs /home/user_name/file_name,	takes image and saves to specified folder
+	Use disconnect, dis, to terminate communications
+		dis
+	Use quit, q, to leave CHDKPTP
+		q
+	Use help to view all options in the CHDKPTP CLI
+
+4. Troubleshooting:
+	Error: No matching devices found,	Check the USB connection and if the camera is on, may need a power cycle
+	Error: switch failed,			Kill gvfs and change automount settings
+	Error: connection failed,		Kill gvfs and change automount settings
+	Not shooting when shoot or rs is used,	Use commands c then rec to connect and swap to recording mode
